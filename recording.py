@@ -6,7 +6,7 @@ import datetime
 import concurrent.futures
 
 def check_url(i):
-    base_url = "https://live-edge{}.bcvcdn.com/hls/stream_Swetty-Pie/playlist.m3u8"
+    base_url = "https://live-edge{}.bcvcdn.com/hls/stream_{channel-name}/playlist.m3u8"
     url = base_url.format(i)
     try:
         response = requests.get(url)
@@ -74,7 +74,7 @@ def monitor_stream():
             time_stream_was_last_live = datetime.datetime.now()
         else:
             print(f'{datetime.datetime.now()}: Stream is not live. Waiting before checking again.')
-            if (datetime.datetime.now() - time_stream_was_last_live).total_seconds() > 1800:  # 30 minutes
+            if (datetime.datetime.now() - time_stream_was_last_live).total_seconds() > 2700:  # 45 minutes
                 print("Stream has been offline for more than 30 minutes. Ending program.")
                 break
 
